@@ -1,0 +1,33 @@
+{
+    "transaction": {
+        "id": "Q8UhQBnXCt6yhT9ZSCSaYmPgzUeF3VknHUqJ99sbr9f801It68sw9HhO",
+        "location_id": "CBASEJdRkP-aPsOfo2qF93IZoVcgAQ",
+        "created_at": "2019-02-10T21:40:29Z",
+        "tenders": [
+            {
+                "id": "b12a7299-bc22-5fde-5895-524b6420a90f",
+                "location_id": "CBASEJdRkP-aPsOfo2qF93IZoVcgAQ",
+                "transaction_id": "Q8UhQBnXCt6yhT9ZSCSaYmPgzUeF3VknHUqJ99sbr9f801It68sw9HhO",
+                "created_at": "2019-02-10T21:40:29Z",
+                "note": "some optional note",
+                "amount_money": {
+                    "amount": 100,
+                    "currency": "AUD"
+                },
+                "customer_id": "CBASEPuXFEWZmJ-cvnlunYt6gNAgAQ",
+                "type": "CARD",
+                "card_details": {
+                    "status": "CAPTURED",
+                    "card": {
+                        "card_brand": "MASTERCARD",
+                        "last_4": "9029",
+                        "fingerprint": "35f70f672d97e5678ace68ba5a14adc6cef7302e84821729576e3e0a51493fe4"
+                    },
+                    "entry_method": "KEYED"
+                }
+            }
+        ],
+        "reference_id": "some optional reference id",
+        "product": "EXTERNAL_API"
+    }
+}
