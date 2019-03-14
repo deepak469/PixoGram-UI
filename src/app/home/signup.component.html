@@ -1,1 +1,26 @@
-<h1>Signup Page</h1>
+<div class="container">
+  <h1><b>Signup</b></h1>
+  <p>
+    <label for="username"><b>Username</b></label>
+    <input #inputusername type="text" class="text" placeholder="Enter Username" required>
+  </p>
+  <p>
+    <label for="inputpassword"><b>Password</b></label>
+    <input #inputpassword type="password" class="text" placeholder="Enter Password" required>
+  </p>
+  <p>
+    <label for="inputemail"><b>Email</b></label>
+    <input #inputemail type="text" class="text" placeholder="Enter Email" required>
+  </p>
+  <p>
+    <label for="inputname"><b>Full Name</b></label>
+    <input #inputname type="text" class="text" placeholder="Enter Full Name" required>
+  </p>
+  <p>
+    <label for="inputcontactnum"><b>Contact Number</b></label>
+    <input #inputcontactnum type="text" class="text" placeholder="Enter Contact Num" required>
+  </p>
+  <button type="submit" class="btn" (click)="signup(inputusername.value, inputpassword.value,
+    inputemail.value, inputname.value, inputcontactnum.value)">Signup</button>
+  <p>
+</div>
