@@ -25,7 +25,21 @@ export class LoginComponent {
         console.log(data)
         localStorage.setItem("jwtToken", data.accessToken);
         localStorage.setItem("role", data.role);
-        localStorage.setItem("userId", data.userId);}
+        localStorage.setItem("userId", data.userId);
+
+        switch (data.role) {
+          case "1":
+            this.router.navigate(['userhome']);
+            break;
+
+          case "2":
+            this.router.navigate(['adminhome']);
+            break;
+
+          default:
+            break;
+        }
+      }
       ,
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {

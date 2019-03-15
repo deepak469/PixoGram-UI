@@ -6,13 +6,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './home/login.component';
 import { SignupComponent } from './home/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminHomeComponent } from './admin/adminhome.component';
+import { UserHomeComponent } from './user/userhome.component';
+import { LogoutComponent } from './home/logout.component';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'adminhome', component: AdminHomeComponent },
+  { path: 'userhome', component: UserHomeComponent },
 ];
 
 @NgModule({
@@ -20,7 +26,10 @@ export const routes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    SignupComponent
+    LogoutComponent,
+    SignupComponent,
+    AdminHomeComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
