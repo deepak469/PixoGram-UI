@@ -20,10 +20,10 @@ export class SignupComponent {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  signup(inputName, inputUsername, inputEmail, inputPassword, inputContactNum) {
+  signup(inputUsername, inputPassword, inputEmail, inputName, inputContactNum) {
     this.http.post<any>(this.signupUrl, {
       name: inputName, username: inputUsername, email: inputEmail,
-      role: 'user', password: inputPassword, contactNum: inputContactNum
+      role: ['user'], password: inputPassword, contactNum: inputContactNum
     }, this.httpOptions).subscribe(_data => { }
       ,
       (err: HttpErrorResponse) => {
