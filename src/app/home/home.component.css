@@ -70,3 +70,11 @@ span.psw {
     width: 100%;
   }
 }
+
+.usernametrue {
+  color: red;
+}
+
+.usernamefalse {
+  color: green;
+}

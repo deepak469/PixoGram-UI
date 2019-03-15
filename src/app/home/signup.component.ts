@@ -17,6 +17,8 @@ export class SignupComponent {
   };
 
   signupUrl = "http://localhost:8924/api/auth/signup";
+  checkUsernameUrl = "http://localhost:8924/api/user/checkusername/?username="
+  usernameInUse = null;
 
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -36,5 +38,26 @@ export class SignupComponent {
       }
     )
     this.router.navigate(['login']);
+  }
+
+  checkusername(inputUsername){
+    this.http.get<any>(this.checkUsernameUrl + inputUsername, this.httpOptions).subscribe(data =>
+    {
+      this.usernameInUse = data;
+    }
+    ,
+    (err: HttpErrorResponse) => {
+      if (err.error instanceof Error) {
+        console.log('Client-side error occured.');
+      } else {
+        console.log(err.message);
+        console.log('Server-side error occured.');
+      }
+    }
+  )
+  }
+
+  getUsernameInUse(){
+    return this.usernameInUse;
   }
 }
