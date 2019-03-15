@@ -1,0 +1,16 @@
+
+  // createImageFromBlob(image: Blob) {
+  //   let reader = new FileReader();
+  //   reader.addEventListener("load", () => {
+  //       this.profilePicture = reader.result;
+  //   }, false);
+  //
+  //   if (image) {
+  //     reader.readAsDataURL(image);
+  //   }
+  // }
+
+  // getIsImageLoading()
+  // {
+  //   return this.isImageLoading;
+  // }

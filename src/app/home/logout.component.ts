@@ -13,6 +13,7 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
     localStorage.setItem("role", "0");
+    localStorage.setItem("jwtToken", "");
     this.router.navigate(['home']);
   }
 }
