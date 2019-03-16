@@ -1,16 +1,4 @@
-
-  // createImageFromBlob(image: Blob) {
-  //   let reader = new FileReader();
-  //   reader.addEventListener("load", () => {
-  //       this.profilePicture = reader.result;
-  //   }, false);
-  //
-  //   if (image) {
-  //     reader.readAsDataURL(image);
-  //   }
-  // }
-
-  // getIsImageLoading()
-  // {
-  //   return this.isImageLoading;
-  // }
+fileDownloadUri: "http://localhost:8924/downloadFile/Badges_v8-07+Practitioner.png"
+fileName: "Badges_v8-07+Practitioner.png"
+fileType: "image/png"
+size: 50483

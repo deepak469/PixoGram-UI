@@ -10,8 +10,13 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 })
 export class UploadComponent implements OnInit {
 
-  uploadForm: FormGroup;
   uploadFileUrl = 'http://localhost:8924/api/uploadFile';
+  imageMetadataUrl = 'http://localhost:8924/api/imagemetadata'
+
+  uploadForm: FormGroup;
+  filename: String;
+  filetype: String;
+  size: String;
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
@@ -40,8 +45,25 @@ export class UploadComponent implements OnInit {
   }
 
   uploadFile(data: FormData) {
-    this.http.post(this.uploadFileUrl, data).subscribe(data => {
-      console.log(data);
+    this.http.post(this.uploadFileUrl, data).subscribe((data: any) => {
+      let filename = data.fileName;
+      let filetype = data.fileType;
+      let size = data.size;
+
+      this.http.post(this.imageMetadataUrl, {
+        userId: localStorage.getItem("userId"), filename: filename,
+        filetype: filetype, size: size
+      }).subscribe(data => { }
+        ,
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Client-side error occured.');
+          } else {
+            console.log(err.message);
+            console.log('Server-side error occured.');
+          }
+        }
+      )
     }
       ,
       (err: HttpErrorResponse) => {
