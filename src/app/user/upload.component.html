@@ -2,14 +2,6 @@
 <mat-card>
       <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
         <mat-card-content>
-          <mat-form-field class="form-field">
-            <mat-label>Select Document Type</mat-label>
-            <mat-select formControlName="type" required>
-              <mat-option value="Passport">Passport</mat-option>
-              <mat-option value="Driving_license">Driving License</mat-option>
-              <mat-option value="PAN">PAN</mat-option>
-            </mat-select>
-          </mat-form-field>
           <br>
           <input formControlName="document" type="file" ng2FileSelect accept=".png, .jpg" [uploader]="uploader" multiple/><br/>
           <br>
@@ -41,7 +33,7 @@
             </tbody>
           </table>
           <br>
-          <button mat-raised-button color="accent" [disabled]="!uploadForm.valid" type="submit">Upload Data</button>
+          <button mat-raised-button color="accent" type="submit">Upload Data</button>
         </mat-card-content>
       </form>
 </mat-card>
