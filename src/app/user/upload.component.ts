@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
 import { FileUploader } from "ng2-file-upload";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
@@ -17,6 +17,9 @@ export class UploadComponent implements OnInit {
   filename: String;
   filetype: String;
   size: String;
+
+  caption = new FormControl('');
+  description = new FormControl('');
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
@@ -52,8 +55,8 @@ export class UploadComponent implements OnInit {
 
       this.http.post(this.imageMetadataUrl, {
         userId: localStorage.getItem("userId"), filename: filename,
-        filetype: filetype, size: size
-      }).subscribe(data => { }
+        filetype: filetype, size: size, caption: this.caption.value, description: this.description.value
+      }).subscribe(_data => { }
         ,
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {

@@ -11,8 +11,14 @@
         <table>
           <thead>
             <tr>
-              <th width="90%">
+              <th width="50%">
                 File Name
+              </th>
+              <th width="20%">
+                Caption
+              </th>
+              <th width="20%">
+                Description
               </th>
               <th width="10%">
                 Remove
@@ -21,8 +27,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of uploader.queue">
-              <th width="90%">
+              <th width="50%">
                 {{ item.file.name}}({{item.file.size/1000000}} MB)
+              </th>
+              <th width="20%">
+                <input type="text" [formControl]="caption">
+              </th>
+              <th width="20%">
+                <input type="text" [formControl]="description">
               </th>
               <th class="text-center" width="10%">
                 <mat-icon (click)="item.remove()">delete</mat-icon>
