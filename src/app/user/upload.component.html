@@ -1,17 +1,15 @@
-<h4>Welcome to !</h4>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<h1>Upload Images</h1>
 <mat-card>
-      <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
-        <mat-card-content>
-          <br>
-          <input formControlName="document" type="file" ng2FileSelect accept=".png, .jpg" [uploader]="uploader" multiple/><br/>
-          <br>
-          <div class="drop-zone">
-          <div ng2FileDrop [uploader]="uploader" class="drop-zone">
-             Drag and drop files to upload
-          </div>
-          </div>
-          <table>
-            <thead>
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
+    <mat-card-content>
+      <input formControlName="document" type="file" ng2FileSelect accept=".png, .jpg, .gif" [uploader]="uploader" multiple />
+      <p>
+        <div class="drop-zone">
+          <div ng2FileDrop [uploader]="uploader" class="drop-zone">Or drag and drop files to upload</div>
+        </div>
+        <table>
+          <thead>
             <tr>
               <th width="90%">
                 File Name
@@ -20,8 +18,8 @@
                 Remove
               </th>
             </tr>
-            </thead>
-            <tbody>
+          </thead>
+          <tbody>
             <tr *ngFor="let item of uploader.queue">
               <th width="90%">
                 {{ item.file.name}}({{item.file.size/1000000}} MB)
@@ -30,10 +28,10 @@
                 <mat-icon (click)="item.remove()">delete</mat-icon>
               </th>
             </tr>
-            </tbody>
-          </table>
-          <br>
-          <button mat-raised-button color="accent" type="submit">Upload Data</button>
-        </mat-card-content>
-      </form>
+          </tbody>
+        </table>
+        <br>
+        <button mat-raised-button color="accent" type="submit">Upload Data</button>
+    </mat-card-content>
+  </form>
 </mat-card>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileUploader } from "ng2-file-upload";
-import { Observable } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Component({
@@ -17,7 +16,7 @@ export class UploadComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
   });
-  title: string = 'Angular File Upload';
+
   constructor(private fb: FormBuilder, private http: HttpClient) { }
 
   uploadSubmit() {
@@ -62,5 +61,4 @@ export class UploadComponent implements OnInit {
       type: [null, Validators.compose([Validators.required])]
     });
   }
-
 }
