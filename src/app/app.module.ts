@@ -20,6 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material';
+import { LoginErrorDialogComponent } from './home/login-error-dialog.component';
+
 
 
 export const routes: Routes = [
@@ -45,6 +48,7 @@ export const routes: Routes = [
     UserHomeComponent,
     UploadComponent,
     UserMediaComponent,
+    LoginErrorDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,8 +63,11 @@ export const routes: Routes = [
     MatCardModule,
     BrowserAnimationsModule,
     MatGridListModule,
+    MatDialogModule,
+
   ],
   providers: [ImageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginErrorDialogComponent],
 })
 export class AppModule { }

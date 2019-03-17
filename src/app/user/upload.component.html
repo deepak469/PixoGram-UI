@@ -31,10 +31,10 @@
                 {{ item.file.name}}({{item.file.size/1000000}} MB)
               </th>
               <th width="20%">
-                <input type="text" [formControl]="caption">
+                <input type="text" formControlName="caption">
               </th>
               <th width="20%">
-                <input type="text" [formControl]="description">
+                <input type="text" formControlName="description">
               </th>
               <th class="text-center" width="10%">
                 <mat-icon (click)="item.remove()">delete</mat-icon>

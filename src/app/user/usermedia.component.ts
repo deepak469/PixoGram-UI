@@ -29,6 +29,7 @@ export class UserMediaComponent implements OnInit {
 
   tiles: Tile[] = [];
   imageFilenames: string[];
+  caption: string[];
   imagesLoading: boolean;
   images: any[];
 
@@ -44,10 +45,12 @@ export class UserMediaComponent implements OnInit {
     //Get image imageMetadataUrl
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       this.imageFilenames = [];
+      this.caption = [];
       var metadataindex = 0;
       while (data[metadataindex] != null) {
         this.imageFilenames.push(data[metadataindex].filename);
-        this.tiles.push({ text: this.imageFilenames[metadataindex], cols: 1, rows: 1, color: 'green' });
+        this.caption.push(data[metadataindex].caption);
+        this.tiles.push({ text: this.imageFilenames[metadataindex], cols: 1, rows: 1, color: 'green'});
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
