@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 export const routes: Routes = [
@@ -57,6 +58,7 @@ export const routes: Routes = [
     MatIconModule,
     MatCardModule,
     BrowserAnimationsModule,
+    MatGridListModule,
   ],
   providers: [ImageService],
   bootstrap: [AppComponent]

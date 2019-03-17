@@ -22,7 +22,7 @@ export class UserHomeComponent implements OnInit {
   fullName: string;
   profilePictureUri: string;
 
-  isProfilePicLoading: boolean;
+  isPicturesLoading: boolean;
   profilePicture: any;
   imageToShow: any;
 
@@ -35,7 +35,7 @@ export class UserHomeComponent implements OnInit {
       this.profilePictureUri = 'http://localhost:8924/api/downloadFile/' + data.profilePicUri;
 
       //Load Profile Pciture
-      this.isProfilePicLoading = true;
+      this.isPicturesLoading = true;
       this.imageService.getImage(this.profilePictureUri).subscribe(data => {
 
         let reader = new FileReader();
@@ -48,9 +48,9 @@ export class UserHomeComponent implements OnInit {
         }
 
         // this.createImageFromBlob(data);
-        this.isProfilePicLoading = false;
+        this.isPicturesLoading = false;
       }, error => {
-        this.isProfilePicLoading = false;
+        this.isPicturesLoading = false;
         console.log(error);
       });
 
