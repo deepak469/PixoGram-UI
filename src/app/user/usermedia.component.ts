@@ -37,7 +37,6 @@ export class UserMediaComponent implements OnInit {
   constructor(private http: HttpClient, private imageService: ImageService) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('profileUserId'));
     let params = new HttpParams();
     params = params.append('userId', localStorage.getItem('userId'));
 
@@ -64,8 +63,7 @@ export class UserMediaComponent implements OnInit {
           console.log('Server-side error occured.');
         }
       }
-    )
-    console.log(this.images);
+    )  
   }
 
   getImage(imageFilename) {

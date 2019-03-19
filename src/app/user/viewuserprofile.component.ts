@@ -68,7 +68,6 @@ export class ViewUserProfileComponent implements OnInit {
         }
       }
     )
-    console.log(this.images);
   }
 
   getImage(imageFilename) {

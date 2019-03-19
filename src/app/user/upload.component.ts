@@ -35,7 +35,6 @@ export class UploadComponent implements OnInit {
     for (let j = 0; j < this.uploader.queue.length; j++) {
       let data = new FormData();
       let fileItem = this.uploader.queue[j]._file;
-      console.log(fileItem.name);
       data.append('file', fileItem);
       data.append('fileSeq', 'seq' + j);
       data.append('dataType', this.uploadForm.controls.type.value);

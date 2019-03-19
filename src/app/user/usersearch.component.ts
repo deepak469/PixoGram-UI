@@ -22,7 +22,6 @@ export class UserSearchComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   searchUser(nameValue) {
-    console.log(nameValue);
     this.users = [];
 
     let params = new HttpParams();
@@ -35,7 +34,6 @@ export class UserSearchComponent {
         this.users.push(data[index]);
         index++;
       }
-      console.log(this.users);
     },
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -49,7 +47,6 @@ export class UserSearchComponent {
 
   viewProfile(userId)
   {
-    console.log(userId);
     this.router.navigate(['viewuserprofile'], {
       queryParams:
         { userId: userId }

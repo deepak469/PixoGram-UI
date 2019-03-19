@@ -24,11 +24,9 @@ export class LoginComponent {
 
   login(inputUsername, inputPassword) {
     this.http.post<any>(this.loginUrl, { username: inputUsername, password: inputPassword }, this.httpOptions).subscribe(data => {
-      console.log(data)
       localStorage.setItem("jwtToken", data.accessToken);
       localStorage.setItem("role", data.role);
       localStorage.setItem("userId", data.userId);
-      localStorage.setItem("profileUserId", data.userId);
 
       switch (data.role) {
         case "1":
