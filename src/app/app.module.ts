@@ -24,6 +24,8 @@ import { MatDialogModule } from '@angular/material';
 import { LoginErrorDialogComponent } from './home/login-error-dialog.component';
 import { UserSearchComponent } from './user/usersearch.component';
 import { ViewUserProfileComponent } from './user/viewuserprofile.component';
+import { ImageAttrComponent } from './user/imageattr.component';
+import { ImageAttrService } from './user/imageattr.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,7 +38,8 @@ export const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'media', component: UserMediaComponent },
   { path: 'usersearch', component: UserSearchComponent },
-  { path: 'viewuserprofile', component: ViewUserProfileComponent },
+  { path: 'viewuserprofile', component: ViewUserProfileComponent},
+  { path: 'imageattr', component: ImageAttrComponent},
 ];
 
 @NgModule({
@@ -53,6 +56,7 @@ export const routes: Routes = [
     LoginErrorDialogComponent,
     UserSearchComponent,
     ViewUserProfileComponent,
+    ImageAttrComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,7 @@ export const routes: Routes = [
     MatGridListModule,
     MatDialogModule,
   ],
-  providers: [ImageService],
+  providers: [ImageService, ImageAttrService],
   bootstrap: [AppComponent],
   entryComponents: [LoginErrorDialogComponent],
 })

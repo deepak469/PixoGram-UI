@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileUploader } from "ng2-file-upload";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { ImageObject } from './image.object';
+import { Router } from '@angular/router';
+import { ImageAttrService } from './imageattr.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,18 +14,15 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 export class UploadComponent implements OnInit {
 
   uploadFileUrl = 'http://localhost:8924/api/uploadFile';
-  imageMetadataUrl = 'http://localhost:8924/api/imagemetadata'
 
   uploadForm: FormGroup;
-  filename: String;
-  filetype: String;
-  size: String;
+  imageObject: ImageObject[] = [];
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
   });
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private imageService: ImageAttrService) { }
 
   uploadSubmit() {
     for (let i = 0; i < this.uploader.queue.length; i++) {
@@ -38,21 +38,13 @@ export class UploadComponent implements OnInit {
       data.append('file', fileItem);
       data.append('fileSeq', 'seq' + j);
       data.append('dataType', this.uploadForm.controls.type.value);
-      this.uploadFile(data);
-    }
-    this.uploader.clearQueue();
-  }
-
-  uploadFile(data: FormData) {
-    this.http.post(this.uploadFileUrl, data).subscribe((data: any) => {
-      let filename = data.fileName;
-      let filetype = data.fileType;
-      let size = data.size;
-
-      this.http.post(this.imageMetadataUrl, {
-        userId: localStorage.getItem("userId"), filename: filename,
-        filetype: filetype, size: size, caption: this.uploadForm.get('caption').value, description: this.uploadForm.get('description').value
-      }).subscribe(_data => { }
+      this.http.post(this.uploadFileUrl, data).subscribe((data: any) => {
+        let currentImageObject = new ImageObject();
+        currentImageObject.filename = data.fileName;
+        currentImageObject.filetype = data.fileType;
+        currentImageObject.size = data.size;
+        this.imageObject.push(currentImageObject);
+      }
         ,
         (err: HttpErrorResponse) => {
           if (err.error instanceof Error) {
@@ -64,24 +56,15 @@ export class UploadComponent implements OnInit {
         }
       )
     }
-      ,
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log(err.message);
-          console.log('Server-side error occured.');
-        }
-      }
-    )
+    this.uploader.clearQueue();
+    this.imageService.imageObj = this.imageObject;
+    this.router.navigate(['imageattr']);
   }
 
   ngOnInit() {
     this.uploadForm = this.fb.group({
       document: [null, null],
       type: [null, Validators.compose([Validators.required])],
-      caption: [null, null],
-      description: [null, null]
     });
   }
 }
