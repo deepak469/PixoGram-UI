@@ -1,0 +1,12 @@
+<h1>Media</h1>
+<mat-grid-list cols="3" rowHeight="400px">
+  <mat-grid-tile *ngFor="let tile of tiles; let i = index" [attr.data-index]="i"
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.background]="tile.color">
+    <img [src]="images[i]" height="400px"/>
+    <mat-grid-tile-footer>
+      {{caption[i]}}
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>

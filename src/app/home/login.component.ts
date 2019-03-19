@@ -28,6 +28,7 @@ export class LoginComponent {
       localStorage.setItem("jwtToken", data.accessToken);
       localStorage.setItem("role", data.role);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("profileUserId", data.userId);
 
       switch (data.role) {
         case "1":
@@ -44,7 +45,7 @@ export class LoginComponent {
     }
       ,
       (err: HttpErrorResponse) => {
-        this.openAlertDialog(err.message);
+        this.openAlertDialog("Login Failed, check your username and credentials");
         if (err.error instanceof Error) {
           console.log('Client-side error occured.');
         } else {

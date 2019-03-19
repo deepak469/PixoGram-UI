@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from './image.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Tile {
   color: string;
@@ -11,12 +12,11 @@ export interface Tile {
 
 @Component({
   selector: 'app-usermedia',
-  templateUrl: './usermedia.component.html',
+  templateUrl: './viewuserprofile.component.html',
   styleUrls: ['./user.component.css']
 })
 
-
-export class UserMediaComponent implements OnInit {
+export class ViewUserProfileComponent implements OnInit {
   title = 'UserMedia';
 
   headers = new HttpHeaders({
@@ -27,19 +27,22 @@ export class UserMediaComponent implements OnInit {
   imageMetadataUrl = 'http://localhost:8924/api/imagemetadata/{userId}'
   downloadImageUrl = 'http://localhost:8924/api/downloadFile/'
 
+  profileUserId: string;
   tiles: Tile[] = [];
   imageFilenames: string[];
   caption: string[];
   imagesLoading: boolean;
   images: any[];
 
-
-  constructor(private http: HttpClient, private imageService: ImageService) { }
+  constructor(private http: HttpClient, private imageService: ImageService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('profileUserId'));
+    this.route.queryParams.subscribe(params => {
+      this.profileUserId = params.userId;
+    })
+
     let params = new HttpParams();
-    params = params.append('userId', localStorage.getItem('userId'));
+    params = params.append('userId', this.profileUserId);
 
     this.images = [];
 

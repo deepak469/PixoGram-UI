@@ -1,0 +1,18 @@
+<h1>User Search</h1>
+<p>
+  <label for="inputname"><b>Search for User</b></label>
+  <br>
+  <input #inputname type="text" class="text" placeholder="Enter Name" required>
+</p>
+<button type="submit" class="btn" (click)="searchUser(inputname.value)">Search</button>
+<p>
+  <table>
+    <tr>
+      <td><b>Name</b></td>
+    </tr>
+    <tr *ngFor="let vals of users">
+      <td>{{vals.name}}</td>
+      <td><button type="submit" class="btn" (click)="viewProfile(vals.id)">Profile</button></td>
+      <td><button type="submit" class="btn" (click)="addFriend(vals.id)">Add Friend</button></td>
+    </tr>
+  </table>

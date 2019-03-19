@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { FileUploader } from "ng2-file-upload";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
@@ -17,9 +17,6 @@ export class UploadComponent implements OnInit {
   filename: String;
   filetype: String;
   size: String;
-
-  caption = new FormControl('');
-  description = new FormControl('');
 
   public uploader: FileUploader = new FileUploader({
     isHTML5: true
@@ -83,7 +80,9 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
     this.uploadForm = this.fb.group({
       document: [null, null],
-      type: [null, Validators.compose([Validators.required])]
+      type: [null, Validators.compose([Validators.required])],
+      caption: [null, null],
+      description: [null, null]
     });
   }
 }

@@ -22,8 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material';
 import { LoginErrorDialogComponent } from './home/login-error-dialog.component';
-
-
+import { UserSearchComponent } from './user/usersearch.component';
+import { ViewUserProfileComponent } from './user/viewuserprofile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -35,6 +35,8 @@ export const routes: Routes = [
   { path: 'userhome', component: UserHomeComponent },
   { path: 'upload', component: UploadComponent },
   { path: 'media', component: UserMediaComponent },
+  { path: 'usersearch', component: UserSearchComponent },
+  { path: 'viewuserprofile', component: ViewUserProfileComponent },
 ];
 
 @NgModule({
@@ -49,6 +51,8 @@ export const routes: Routes = [
     UploadComponent,
     UserMediaComponent,
     LoginErrorDialogComponent,
+    UserSearchComponent,
+    ViewUserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,6 @@ export const routes: Routes = [
     BrowserAnimationsModule,
     MatGridListModule,
     MatDialogModule,
-
   ],
   providers: [ImageService],
   bootstrap: [AppComponent],
