@@ -3,7 +3,8 @@ export class ImageObject {
   filetype: String;
   size: String;
 
-  ImageObject(inputFilename, inputFiletype, inputSize) {
+  constructor(inputFilename: String, inputFiletype: String, inputSize: String)
+  {
     this.filename = inputFilename;
     this.filetype = inputFiletype;
     this.size = inputSize;
