@@ -39,10 +39,6 @@ export class UploadComponent implements OnInit {
       data.append('fileSeq', 'seq' + j);
       data.append('dataType', this.uploadForm.controls.type.value);
       this.http.post(this.uploadFileUrl, data).subscribe((data: any) => {
-        // let currentImageObject = );
-        // currentImageObject.filename = ;
-        // currentImageObject.filetype = ;
-        // currentImageObject.size = ;
         this.imageObject.push(new ImageObject(data.fileName, data.fileType, data.size));
       }
         ,
