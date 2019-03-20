@@ -1,0 +1,34 @@
+<h1>Set Image Attribute</h1>
+<div *ngIf="imageObject">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Filename</th>
+        <th>Filetype</th>
+        <th>Size</th>
+        <th>Caption</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rows of imageObject; let index = i" [attr.data-index]="i">
+        <td>
+          {{rows.filename}}
+        </td>
+        <td>
+          {{rows.filetype}}
+        </td>
+        <td>
+          {{rows.size}}
+        </td>
+        <td>
+          <input [(ngModel)]="rows.caption" type="text" class="text" placeholder="Enter Caption" required>
+        </td>
+        <td>
+          <input [(ngModel)]="rows.description" type="text" class="text" placeholder="Enter Description" required>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="submit" class="btn" (click)="sendImageMetadata()">Add Attributes</button>
+</div>

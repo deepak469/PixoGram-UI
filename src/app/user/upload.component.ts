@@ -14,6 +14,7 @@ import { ImageAttrService } from './imageattr.service';
 export class UploadComponent implements OnInit {
 
   uploadFileUrl = 'http://localhost:8924/api/uploadFile';
+  imageMetadataUrl = 'http://localhost:8924/api/imagemetadata'
 
   uploadForm: FormGroup;
   imageObject: ImageObject[] = [];
@@ -40,6 +41,21 @@ export class UploadComponent implements OnInit {
       data.append('dataType', this.uploadForm.controls.type.value);
       this.http.post(this.uploadFileUrl, data).subscribe((data: any) => {
         this.imageObject.push(new ImageObject(data.fileName, data.fileType, data.size));
+
+        this.http.post(this.imageMetadataUrl, {
+          userId: localStorage.getItem("userId"), filename: data.fileName,
+          filetype: data.fileType, size: data.size, caption: "", description: ""
+        }).subscribe(_data => { }
+          ,
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Client-side error occured.');
+            } else {
+              console.log(err.message);
+              console.log('Server-side error occured.');
+            }
+          }
+        )
       }
         ,
         (err: HttpErrorResponse) => {

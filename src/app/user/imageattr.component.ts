@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { ImageAttrService } from './imageattr.service';
 import { ImageObject } from './image.object';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'image-attr',
@@ -9,11 +10,11 @@ import { ImageObject } from './image.object';
   styleUrls: ['./user.component.css']
 })
 
-export class ImageAttrComponent implements OnInit{
+export class ImageAttrComponent implements OnInit {
 
-  @Input() imageObj: ImageObject
+  @Input() imageObj: ImageObject;
 
-  imageMetadataUrl = 'http://localhost:8924/api/imagemetadata'
+  imageMetadataUpdateUrl = 'http://localhost:8924/api/imagemetadata/update?'
 
   imageObject: ImageObject[] = [];
 
@@ -22,30 +23,37 @@ export class ImageAttrComponent implements OnInit{
     'Authorization': 'Bearer ' + localStorage.getItem("jwtToken"),
   });
 
-  constructor(private http: HttpClient, private imageService: ImageAttrService) {}
+  constructor(private http: HttpClient, private imageService: ImageAttrService, private router: Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.delay(1000);
     this.imageObject = this.imageService.imageObj;
     console.log(this.imageObject);
   }
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-  // addMetadata(){
-  //   this.http.post(this.imageMetadataUrl, {
-  //     userId: localStorage.getItem("userId"), filename: filename,
-  //     filetype: filetype, size: size, caption: this.uploadForm.get('caption').value, description: this.uploadForm.get('description').value
-  //   }).subscribe(_data => { }
-  //     ,
-  //     (err: HttpErrorResponse) => {
-  //       if (err.error instanceof Error) {
-  //         console.log('Client-side error occured.');
-  //       } else {
-  //         console.log(err.message);
-  //         console.log('Server-side error occured.');
-  //       }
-  //     }
-  //   )
-  // }
-
-
+  sendImageMetadata() {
+    for (let i = 0; i < this.imageObject.length; i++) {
+      let currImageMetadataUrl = this.imageMetadataUpdateUrl +
+      "filename=" + this.imageObject[i].filename.toString() +
+      "&caption=" + this.imageObject[i].caption.toString() +
+      "&description=" + this.imageObject[i].description.toString();
+      
+      this.http.post(currImageMetadataUrl, {headers: this.headers}).subscribe(_data => { }
+        ,
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Client-side error occured.');
+          } else {
+            console.log(err.message);
+            console.log('Server-side error occured.');
+          }
+        }
+      )
+      this.router.navigate(['media']);
+    }
+  }
 }
