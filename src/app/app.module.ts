@@ -26,6 +26,7 @@ import { UserSearchComponent } from './user/usersearch.component';
 import { ViewUserProfileComponent } from './user/viewuserprofile.component';
 import { ImageAttrComponent } from './user/imageattr.component';
 import { ImageAttrService } from './user/imageattr.service';
+import { EditImageAttrComponent } from './user/editimageattr.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -40,6 +41,7 @@ export const routes: Routes = [
   { path: 'usersearch', component: UserSearchComponent },
   { path: 'viewuserprofile', component: ViewUserProfileComponent},
   { path: 'imageattr', component: ImageAttrComponent},
+  { path: 'editimageattr', component: EditImageAttrComponent},
 ];
 
 @NgModule({
@@ -57,6 +59,7 @@ export const routes: Routes = [
     UserSearchComponent,
     ViewUserProfileComponent,
     ImageAttrComponent,
+    EditImageAttrComponent,
   ],
   imports: [
     BrowserModule,

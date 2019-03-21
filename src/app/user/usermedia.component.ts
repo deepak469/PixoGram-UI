@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from './image.service';
+import { Router } from '@angular/router';
 
 export interface Tile {
   color: string;
   cols: number;
   rows: number;
-  text: string;
+  id: string;
+  filename: string;
   caption: string;
 }
 
@@ -33,7 +35,7 @@ export class UserMediaComponent implements OnInit {
   images: any[];
   retrievalFinished: boolean = false;
 
-  constructor(private http: HttpClient, private imageService: ImageService) { }
+  constructor(private http: HttpClient, private imageService: ImageService, private router: Router) { }
 
   ngOnInit() {
     let params = new HttpParams();
@@ -43,9 +45,16 @@ export class UserMediaComponent implements OnInit {
 
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       var metadataindex = 0;
-
+      console.log(data)
       while (data[metadataindex] != null) {
-        this.tiles.push({ text: data[metadataindex].filename, caption: data[metadataindex].caption, cols: 1, rows: 1, color: 'green' });
+        console.log(data[metadataindex].id);
+        this.tiles.push({
+          id: data[metadataindex].id,
+          filename: data[metadataindex].filename,
+          caption: data[metadataindex].caption,
+          cols: 1,
+          rows: 1,
+          color: 'white' });
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
@@ -81,8 +90,16 @@ export class UserMediaComponent implements OnInit {
     )
   }
 
-  getRetrievalFinished()
-  {
+  getRetrievalFinished() {
     return this.retrievalFinished;
+  }
+
+  editAttributes(inputId) {
+    this.router.navigate(['editimageattr'], {
+      queryParams:
+      {
+        id: inputId,
+      }
+    });
   }
 }

@@ -1,0 +1,17 @@
+<h1>Edit Image Attributes</h1>
+<div *ngIf="dataLoaded">
+  <p>
+    Filename: {{filename}}
+  </p>
+  <p>
+    Current Caption: {{currCaption}}
+    <br>
+    Update Caption: <input [(ngModel)]="updtCaption" type="text" class="text" placeholder={{currCaption}} required>
+  </p>
+  <p>
+    Current Description: {{currDescription}}
+    <br>
+    Update Description: <input [(ngModel)]="updtDescription" type="text" class="text" placeholder={{currDescription}} required>
+  </p>
+  <button type="submit" class="btn" (click)="sendImageMetadata()">Apply Updates</button>
+</div>
