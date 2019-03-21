@@ -7,6 +7,7 @@ export interface Tile {
   cols: number;
   rows: number;
   text: string;
+  caption: string;
 }
 
 @Component({
@@ -28,11 +29,9 @@ export class UserMediaComponent implements OnInit {
   downloadImageUrl = 'http://localhost:8924/api/downloadFile/'
 
   tiles: Tile[] = [];
-  imageFilenames: string[];
-  caption: string[];
   imagesLoading: boolean;
   images: any[];
-
+  retrievalFinished: boolean = false;
 
   constructor(private http: HttpClient, private imageService: ImageService) { }
 
@@ -42,15 +41,11 @@ export class UserMediaComponent implements OnInit {
 
     this.images = [];
 
-    //Get image imageMetadataUrl
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
-      this.imageFilenames = [];
-      this.caption = [];
       var metadataindex = 0;
+
       while (data[metadataindex] != null) {
-        this.imageFilenames.push(data[metadataindex].filename);
-        this.caption.push(data[metadataindex].caption);
-        this.tiles.push({ text: this.imageFilenames[metadataindex], cols: 1, rows: 1, color: 'green'});
+        this.tiles.push({ text: data[metadataindex].filename, caption: data[metadataindex].caption, cols: 1, rows: 1, color: 'green' });
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
@@ -63,7 +58,8 @@ export class UserMediaComponent implements OnInit {
           console.log('Server-side error occured.');
         }
       }
-    )  
+    )
+    this.retrievalFinished = true;
   }
 
   getImage(imageFilename) {
@@ -83,5 +79,10 @@ export class UserMediaComponent implements OnInit {
       console.log(error);
     }
     )
+  }
+
+  getRetrievalFinished()
+  {
+    return this.retrievalFinished;
   }
 }
