@@ -10,9 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 
 export class EditImageAttrComponent implements OnInit {
-
-  @Input() imageObj: ImageObject;
-
+  
   imageMetadataGetUrl = 'http://localhost:8924/api/imagemetadata/{id}';
   imageMetadataUpdateUrl = 'http://localhost:8924/api/imagemetadata/update?'
 
@@ -58,7 +56,6 @@ export class EditImageAttrComponent implements OnInit {
   }
 
   sendImageMetadata() {
-    console.log(this.updtCaption);
     let currImageMetadataUrl = this.imageMetadataUpdateUrl +
       "filename=" + this.filename +
       "&caption=" + this.updtCaption +

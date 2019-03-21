@@ -45,9 +45,7 @@ export class UserMediaComponent implements OnInit {
 
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       var metadataindex = 0;
-      console.log(data)
       while (data[metadataindex] != null) {
-        console.log(data[metadataindex].id);
         this.tiles.push({
           id: data[metadataindex].id,
           filename: data[metadataindex].filename,
