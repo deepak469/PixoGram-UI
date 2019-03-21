@@ -1,0 +1,18 @@
+<h1>Change Profile Pic</h1>
+<div *ngIf="getRetrievalFinished()">
+  <p>
+    <b>Current Profile Pic:</b> {{currentProfilePic}}
+  </p>
+  <b>Available Images</b>
+  <br>
+  <table>
+    <tr>
+      <td>Filename</td>
+      <td>Select Image</td>
+    </tr>
+    <tr *ngFor="let vals of availableImages">
+      <td>{{vals}}</td>
+      <td><button type="submit" class="btn" (click)="selectNewPic(vals)">Select Picture</button></td>
+    </tr>
+  </table>
+</div>

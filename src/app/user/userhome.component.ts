@@ -1,6 +1,7 @@
 import { ImageService } from './image.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,17 +22,20 @@ export class UserHomeComponent implements OnInit {
 
   fullName: string;
   profilePictureUri: string;
+  dateJoined: string;
 
   isPicturesLoading: boolean;
   profilePicture: any;
   imageToShow: any;
 
-  constructor(private http: HttpClient, private imageService: ImageService) { }
+  constructor(private http: HttpClient, private imageService: ImageService, private router: Router) { }
 
   ngOnInit() {
     //Get user details
     this.http.get<any>(this.getUserDetailsUrl, { headers: this.headers }).subscribe(data => {
+      console.log(data);
       this.fullName = data.name;
+      this.dateJoined = data.createdAt;
       this.profilePictureUri = 'http://localhost:8924/api/downloadFile/' + data.profilePicUri;
 
       //Load Profile Pciture
@@ -63,5 +67,9 @@ export class UserHomeComponent implements OnInit {
         }
       }
     )
+  }
+
+  changeProfilePic(){
+    this.router.navigate(['changeprofilepic'])
   }
 }
