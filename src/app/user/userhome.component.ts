@@ -33,7 +33,6 @@ export class UserHomeComponent implements OnInit {
   ngOnInit() {
     //Get user details
     this.http.get<any>(this.getUserDetailsUrl, { headers: this.headers }).subscribe(data => {
-      console.log(data);
       this.fullName = data.name;
       this.dateJoined = data.createdAt;
       this.profilePictureUri = 'http://localhost:8924/api/downloadFile/' + data.profilePicUri;

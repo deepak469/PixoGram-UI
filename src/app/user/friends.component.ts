@@ -60,7 +60,6 @@ export class FriendsComponent implements OnInit {
         }
       }
     )
-    console.log(this.friendDetails);
   }
 
   viewProfile(userId) {

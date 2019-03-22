@@ -28,7 +28,6 @@ export class ImageAttrComponent implements OnInit {
   async ngOnInit() {
     await this.delay(1000);
     this.imageObject = this.imageService.imageObj;
-    console.log(this.imageObject);
   }
 
   delay(ms: number) {
@@ -41,7 +40,7 @@ export class ImageAttrComponent implements OnInit {
       "filename=" + this.imageObject[i].filename.toString() +
       "&caption=" + this.imageObject[i].caption.toString() +
       "&description=" + this.imageObject[i].description.toString();
-      
+
       this.http.post(currImageMetadataUrl, {headers: this.headers}).subscribe(_data => { }
         ,
         (err: HttpErrorResponse) => {

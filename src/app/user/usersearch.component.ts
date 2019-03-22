@@ -55,7 +55,7 @@ export class UserSearchComponent {
 
   addFriend(friendId) {
     this.http.post<any>(this.addFriendUrl, { userId: localStorage.getItem('userId'), friendId: friendId }, { headers: this.headers }).toPromise().then(data => {
-      console.log(data)
+      //Todo Dialog box to say friend added
     }
       ,
       (err: HttpErrorResponse) => {
