@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'change-profile-pic',
   templateUrl: './changeprofilepic.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class ChangeProfilePicComponent implements OnInit {

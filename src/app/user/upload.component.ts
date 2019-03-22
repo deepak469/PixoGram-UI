@@ -9,7 +9,7 @@ import { ImageAttrService } from './imageattr.service';
 @Component({
   selector: 'app-file-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['/../app.component.css']
 })
 export class UploadComponent implements OnInit {
 

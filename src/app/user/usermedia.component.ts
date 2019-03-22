@@ -15,7 +15,7 @@ export interface Tile {
 @Component({
   selector: 'app-usermedia',
   templateUrl: './usermedia.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 

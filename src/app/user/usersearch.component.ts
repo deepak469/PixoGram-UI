@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-usersearch',
   templateUrl: './usersearch.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class UserSearchComponent {

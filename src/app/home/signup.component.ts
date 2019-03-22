@@ -5,7 +5,7 @@ import { HttpErrorResponse, HttpClient, HttpHeaders } from '@angular/common/http
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class SignupComponent {

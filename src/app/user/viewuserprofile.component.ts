@@ -13,7 +13,7 @@ export interface Tile {
 @Component({
   selector: 'app-usermedia',
   templateUrl: './viewuserprofile.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class ViewUserProfileComponent implements OnInit {

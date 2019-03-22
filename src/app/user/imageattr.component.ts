@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'image-attr',
   templateUrl: './imageattr.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class ImageAttrComponent implements OnInit {

@@ -7,7 +7,7 @@ import { LoginErrorDialogComponent } from './login-error-dialog.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class LoginComponent {

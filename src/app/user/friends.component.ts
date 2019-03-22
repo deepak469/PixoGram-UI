@@ -11,7 +11,7 @@ export interface FriendDetails {
 @Component({
   selector: 'friends',
   templateUrl: './friends.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class FriendsComponent implements OnInit {

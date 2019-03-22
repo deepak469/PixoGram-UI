@@ -6,11 +6,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'image-attr',
   templateUrl: './editimageattr.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['/../app.component.css']
 })
 
 export class EditImageAttrComponent implements OnInit {
-  
+
   imageMetadataGetUrl = 'http://localhost:8924/api/imagemetadata/{id}';
   imageMetadataUpdateUrl = 'http://localhost:8924/api/imagemetadata/update?'
 
