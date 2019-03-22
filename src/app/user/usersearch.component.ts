@@ -16,6 +16,7 @@ export class UserSearchComponent {
   });
 
   searchUserUrl = 'http://localhost:8924/api/user/namesearch/';
+  addFriendUrl = 'http://localhost:8924/api/friends/';
 
   users: any[];
 
@@ -45,16 +46,25 @@ export class UserSearchComponent {
     )
   }
 
-  viewProfile(userId)
-  {
+  viewProfile(userId) {
     this.router.navigate(['viewuserprofile'], {
       queryParams:
         { userId: userId }
     });
   }
 
-  addFriend()
-  {
-    //Http call to add friend here
+  addFriend(friendId) {
+    this.http.post<any>(this.addFriendUrl, { userId: localStorage.getItem('userId'), friendId: friendId }, { headers: this.headers }).toPromise().then(data => {
+      console.log(data)
+    }
+      ,
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    )
   }
 }

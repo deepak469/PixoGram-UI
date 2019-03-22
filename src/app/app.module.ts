@@ -28,6 +28,7 @@ import { ImageAttrComponent } from './user/imageattr.component';
 import { ImageAttrService } from './user/imageattr.service';
 import { EditImageAttrComponent } from './user/editimageattr.component';
 import { ChangeProfilePicComponent } from './user/changeprofilepic.component';
+import { FriendsComponent } from './user/friends.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -44,6 +45,7 @@ export const routes: Routes = [
   { path: 'imageattr', component: ImageAttrComponent},
   { path: 'editimageattr', component: EditImageAttrComponent},
   { path: 'changeprofilepic', component: ChangeProfilePicComponent},
+  { path: 'friends', component: FriendsComponent},
 ];
 
 @NgModule({
@@ -63,6 +65,7 @@ export const routes: Routes = [
     ImageAttrComponent,
     EditImageAttrComponent,
     ChangeProfilePicComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,

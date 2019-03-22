@@ -1,0 +1,12 @@
+<h1>Friends List</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Member Since</th>
+  </tr>
+  <tr *ngFor="let vals of friendDetails">
+    <td>{{vals.name}}</td>
+    <td>{{vals.memberSince | date}}</td>
+    <td><button type="submit" class="btn" (click)="viewProfile(vals.id)">Profile</button></td>
+  </tr>
+</table>
