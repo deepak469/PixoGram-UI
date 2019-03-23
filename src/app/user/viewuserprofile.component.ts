@@ -28,7 +28,6 @@ export class ViewUserProfileComponent implements OnInit {
 
   imageMetadataUrl = 'http://localhost:8924/api/imagemetadata/{userId}'
   downloadImageUrl = 'http://localhost:8924/api/downloadFile/'
-  addLikeUrl = 'http://localhost:8924/api/imagemetadata/like/'
 
   profileUserId: string;
   tiles: Tile[] = [];
@@ -93,6 +92,40 @@ export class ViewUserProfileComponent implements OnInit {
     )
   }
 
+  openDialog(image, caption, filename): void {
+    const dialogRef = this.dialog.open(ImageDialog, {
+      width: '500px',
+      data: {filename: filename, image: image, caption: caption}
+    });
+
+    dialogRef.afterClosed().subscribe(_result => {
+    });
+  }
+
+}
+
+@Component({
+  selector: 'image-dialog',
+  templateUrl: './image.dialog.html',
+})
+export class ImageDialog {
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem("jwtToken"),
+  });
+
+  addLikeUrl = 'http://localhost:8924/api/imagemetadata/like/'
+  sendCommentUrl = 'http://localhost:8924/api/imagecomments/'
+
+  constructor(
+    public dialogRef: MatDialogRef<ImageDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   likePic(filename){
     let currImageMetadataUrl = this.addLikeUrl + "?filename=" + filename;
 
@@ -109,30 +142,17 @@ export class ViewUserProfileComponent implements OnInit {
     )
   }
 
-  openDialog(): void {
-    console.log("Clicked")
-    const dialogRef = this.dialog.open(ImageDialog, {
-      width: '250px',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(_result => {
-    });
-  }
-
-}
-
-@Component({
-  selector: 'image-dialog',
-  templateUrl: './image.dialog.html',
-})
-export class ImageDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<ImageDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  sendComment(comment, filename){
+    this.http.post(this.sendCommentUrl, {comment: comment, filename: filename, username: localStorage.getItem('name')} ,{ headers: this.headers }).toPromise().then(_data => {}
+      ,
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log(err.message);
+          console.log('Server-side error occured.');
+        }
+      }
+    )
   }
 }

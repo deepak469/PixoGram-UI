@@ -1,16 +1,13 @@
-<h1 mat-dialog-title>Hi</h1>
+<h1 mat-dialog-title>{{data.caption}}</h1>
 <div mat-dialog-content>
-  <p>Image Dialog</p>
-  <!-- <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field> -->
+  <img [src]="data.image" height="400px" />
 </div>
+<button type="submit" class="likebutton" style="border: 0; background: transparent" (click)="likePic(data.filename)">
+  <img src="/../../assets/thumbs-up.png" width="30" height="30" alt="submit" />
+</button>
+<br>
+<input matInput [(ngModel)]="comment" placeholder="Comment">
+<button mat-button (click)="sendComment(comment, data.filename)">Send Comment</button>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Close</button>
 </div>
-
-
-<!-- Copyright 2018 Google Inc. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->

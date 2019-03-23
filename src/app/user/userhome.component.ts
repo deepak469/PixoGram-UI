@@ -34,6 +34,7 @@ export class UserHomeComponent implements OnInit {
     //Get user details
     this.http.get<any>(this.getUserDetailsUrl, { headers: this.headers }).subscribe(data => {
       this.fullName = data.name;
+      localStorage.setItem('name', data.name);
       this.dateJoined = data.createdAt;
       this.profilePictureUri = 'http://localhost:8924/api/downloadFile/' + data.profilePicUri;
 

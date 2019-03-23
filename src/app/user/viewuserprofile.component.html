@@ -5,13 +5,10 @@
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
     [style.background]="tile.color"
-    (click)="openDialog()">
+    (click)="openDialog(images[i], caption[i], tile.text)">
     <img [src]="images[i]" height="400px"/>
     <mat-grid-tile-footer>
       {{caption[i]}} <br> Likes: {{tile.likes}}
-      <button type="submit" class="likebutton" style="border: 0; background: transparent" (click)="likePic(tile.text)">
-        <img src="/../../assets/thumbs-up.png" width="30" height="30" alt="submit" />
-    </button>
     </mat-grid-tile-footer>
   </mat-grid-tile>
 </mat-grid-list>
