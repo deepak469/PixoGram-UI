@@ -10,6 +10,7 @@ export interface Tile {
   id: string;
   filename: string;
   caption: string;
+  likes: string;
 }
 
 @Component({
@@ -50,6 +51,7 @@ export class UserMediaComponent implements OnInit {
           id: data[metadataindex].id,
           filename: data[metadataindex].filename,
           caption: data[metadataindex].caption,
+          likes: data[metadataindex].likes,
           cols: 1,
           rows: 1,
           color: 'white' });

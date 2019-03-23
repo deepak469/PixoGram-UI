@@ -44,7 +44,7 @@ export class UploadComponent implements OnInit {
 
         this.http.post(this.imageMetadataUrl, {
           userId: localStorage.getItem("userId"), filename: data.fileName,
-          filetype: data.fileType, size: data.size, caption: "", description: ""
+          filetype: data.fileType, size: data.size, caption: "", description: "", likes: 0
         }).subscribe(_data => { }
           ,
           (err: HttpErrorResponse) => {

@@ -8,6 +8,7 @@ export interface Tile {
   cols: number;
   rows: number;
   text: string;
+  likes: string;
 }
 
 @Component({
@@ -26,6 +27,7 @@ export class ViewUserProfileComponent implements OnInit {
 
   imageMetadataUrl = 'http://localhost:8924/api/imagemetadata/{userId}'
   downloadImageUrl = 'http://localhost:8924/api/downloadFile/'
+  addLikeUrl = 'http://localhost:8924/api/imagemetadata/like/'
 
   profileUserId: string;
   tiles: Tile[] = [];
@@ -52,9 +54,10 @@ export class ViewUserProfileComponent implements OnInit {
       this.caption = [];
       var metadataindex = 0;
       while (data[metadataindex] != null) {
+        console.log(data[metadataindex]);
         this.imageFilenames.push(data[metadataindex].filename);
         this.caption.push(data[metadataindex].caption);
-        this.tiles.push({ text: this.imageFilenames[metadataindex], cols: 1, rows: 1, color: 'green'});
+        this.tiles.push({ text: this.imageFilenames[metadataindex], likes: data[metadataindex].likes, cols: 1, rows: 1, color: 'green'});
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
@@ -86,6 +89,22 @@ export class ViewUserProfileComponent implements OnInit {
       this.imagesLoading = false;
       console.log(error);
     }
+    )
+  }
+
+  likePic(filename){
+    let currImageMetadataUrl = this.addLikeUrl + "?filename=" + filename;
+
+    this.http.post(currImageMetadataUrl, { headers: this.headers }).toPromise().then(_data => {}
+      ,
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log(err.message);
+          console.log('Server-side error occured.');
+        }
+      }
     )
   }
 }

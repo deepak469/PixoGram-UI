@@ -3,7 +3,7 @@
 <mat-card>
   <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
     <mat-card-content>
-      <input formControlName="document" type="file" ng2FileSelect accept=".png, .jpg, .gif" [uploader]="uploader" multiple />
+      <input formControlName="document" type="file" ng2FileSelect accept=".png, .jpg, .jpeg, .gif" [uploader]="uploader" multiple />
       <p>
         <div class="drop-zone">
           <div ng2FileDrop [uploader]="uploader" class="drop-zone">Or drag and drop files to upload</div>
