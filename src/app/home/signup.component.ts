@@ -20,12 +20,18 @@ export class SignupComponent {
   checkUsernameUrl = "http://localhost:8924/api/user/checkusername/?username="
   usernameInUse = null;
 
+  username: string;
+  name: string;
+  email: string;
+  password: string;
+  contactNum: string;
+
   constructor(private router: Router, private http: HttpClient) { }
 
-  signup(inputUsername, inputPassword, inputEmail, inputName, inputContactNum) {
+  signup() {
     this.http.post<any>(this.signupUrl, {
-      name: inputName, username: inputUsername, email: inputEmail,
-      role: ['user'], password: inputPassword, contactNum: inputContactNum
+      name: this.name, username: this.username, email: this.email,
+      role: ['user'], password: this.password, contactNum: this.contactNum
     }, this.httpOptions).subscribe(_data => { }
       ,
       (err: HttpErrorResponse) => {
@@ -40,8 +46,8 @@ export class SignupComponent {
     this.router.navigate(['login']);
   }
 
-  checkusername(inputUsername){
-    this.http.get<any>(this.checkUsernameUrl + inputUsername, this.httpOptions).subscribe(data =>
+  checkusername(){
+    this.http.get<any>(this.checkUsernameUrl + this.username, this.httpOptions).subscribe(data =>
     {
       this.usernameInUse = data;
     }

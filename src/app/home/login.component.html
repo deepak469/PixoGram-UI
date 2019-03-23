@@ -2,15 +2,15 @@
 <div class="container">
   <h1><b>Login</b></h1>
   <p>
-    <label for="inputusername"><b>Username</b></label>
-    <input #inputusername type="text" class="text" placeholder="Enter Username" required>
+    <label for="username"><b>Username</b></label>
+    <input [(ngModel)]="username" type="text" class="text" placeholder="Enter Username" required>
   </p>
   <p>
-    <label for="inputpassword"><b>Password</b></label>
-    <input #inputpassword type="password" class="text" placeholder="Enter Password" required>
+    <label for="password"><b>Password</b></label>
+    <input [(ngModel)]="password" type="password" class="text" placeholder="Enter Password" required>
   </p>
   <p>
-    <button type="submit" class="btn" (click)="login(inputusername.value, inputpassword.value)">Login</button>
+    <button type="submit" class="btn" (click)="login()">Login</button>
   </p>
   <button type="submit" class="btn" (click)="forgotPassword()">I Forgot My Password</button>
 </div>

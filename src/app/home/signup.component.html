@@ -2,28 +2,27 @@
   <h1><b>Signup</b></h1>
   <p>
     <label for="username"><b>Username</b></label>
-    <input #inputusername type="text" class="text" placeholder="Enter Username" required>
-    <button type="submit" class="btn" (click)="checkusername(inputusername.value)">Username Available?</button>
+    <input [(ngModel)]="username" type="text" class="text" placeholder="Enter Username" required>
+    <button type="submit" class="btn" (click)="checkusername()">Username Available?</button>
     </p>
     <div *ngIf=getUsernameInUse() class="usernametrue">Username already in use</div>
     <div *ngIf=!getUsernameInUse() class="usernamefalse">Username available</div>
   <p>
     <label for="inputpassword"><b>Password</b></label>
-    <input #inputpassword type="password" class="text" placeholder="Enter Password" required>
+    <input [(ngModel)]="password" type="password" class="text" placeholder="Enter Password" required>
   </p>
   <p>
     <label for="inputemail"><b>Email</b></label>
-    <input #inputemail type="text" class="text" placeholder="Enter Email" required>
+    <input [(ngModel)]="email" type="text" class="text" placeholder="Enter Email" required>
   </p>
   <p>
     <label for="inputname"><b>Full Name</b></label>
-    <input #inputname type="text" class="text" placeholder="Enter Full Name" required>
+    <input [(ngModel)]="name" type="text" class="text" placeholder="Enter Full Name" required>
   </p>
   <p>
     <label for="inputcontactnum"><b>Contact Number</b></label>
-    <input #inputcontactnum type="text" class="text" placeholder="Enter Contact Num" required>
+    <input [(ngModel)]="contactNum" type="text" class="text" placeholder="Enter Contact Num" required>
   </p>
-  <button type="submit" class="btn" (click)="signup(inputusername.value, inputpassword.value,
-    inputemail.value, inputname.value, inputcontactnum.value)">Signup</button>
+  <button type="submit" class="btn" (click)="signup()">Signup</button>
   <p>
 </div>

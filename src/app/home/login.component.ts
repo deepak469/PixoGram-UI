@@ -19,12 +19,15 @@ export class LoginComponent {
     })
   };
 
+  username: string;
+  password: string;
+
   loginUrl = 'http://localhost:8924/api/auth/signin'
 
   constructor(private router: Router, private http: HttpClient, private dialog: MatDialog, private list: MatListModule) { }
 
-  login(inputUsername, inputPassword) {
-    this.http.post<any>(this.loginUrl, { username: inputUsername, password: inputPassword }, this.httpOptions).subscribe(data => {
+  login() {
+    this.http.post<any>(this.loginUrl, { username: this.username, password: this.password }, this.httpOptions).subscribe(data => {
       localStorage.setItem("jwtToken", data.accessToken);
       localStorage.setItem("role", data.role);
       localStorage.setItem("userId", data.userId);
