@@ -9,7 +9,7 @@ export interface Tile {
   cols: number;
   rows: number;
   likes: string;
-  imageFilename: string;
+  filename: string;
   caption: string;
 }
 
@@ -51,16 +51,18 @@ export class ViewUserProfileComponent implements OnInit {
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       var metadataindex = 0;
       while (data[metadataindex] != null) {
+        console.log(data[metadataindex].filename);
         this.tiles.push({
-          imageFilename: data[metadataindex].filename,
+          filename: data[metadataindex].filename,
           likes: data[metadataindex].likes,
           caption: data[metadataindex].caption,
           cols: 1,
           rows: 1,
-          color: 'green' });
+          color: 'white' });
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
+
     }
       ,
       (err: HttpErrorResponse) => {
@@ -92,10 +94,10 @@ export class ViewUserProfileComponent implements OnInit {
     )
   }
 
-  openDialog(image, caption, filename): void {
+  openDialog(image, caption, filename, likes): void {
     const dialogRef = this.dialog.open(ImageDialog, {
       width: '500px',
-      data: { filename: filename, image: image, caption: caption }
+      data: { filename: filename, image: image, caption: caption, likes: likes }
     });
 
     dialogRef.afterClosed().subscribe(_result => {
