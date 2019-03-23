@@ -1,9 +1,11 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
 <h1>Media</h1>
 <mat-grid-list cols="3" rowHeight="400px">
   <mat-grid-tile *ngFor="let tile of tiles; let i = index" [attr.data-index]="i"
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
-    [style.background]="tile.color">
+    [style.background]="tile.color"
+    (click)="openDialog()">
     <img [src]="images[i]" height="400px"/>
     <mat-grid-tile-footer>
       {{caption[i]}} <br> Likes: {{tile.likes}}

@@ -23,7 +23,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material';
 import { LoginErrorDialogComponent } from './home/login-error-dialog.component';
 import { UserSearchComponent } from './user/usersearch.component';
-import { ViewUserProfileComponent } from './user/viewuserprofile.component';
+import { ViewUserProfileComponent, ImageDialog } from './user/viewuserprofile.component';
 import { ImageAttrComponent } from './user/imageattr.component';
 import { ImageAttrService } from './user/imageattr.service';
 import { EditImageAttrComponent } from './user/editimageattr.component';
@@ -66,6 +66,7 @@ export const routes: Routes = [
     EditImageAttrComponent,
     ChangeProfilePicComponent,
     FriendsComponent,
+    ImageDialog,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +85,6 @@ export const routes: Routes = [
   ],
   providers: [ImageService, ImageAttrService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginErrorDialogComponent],
+  entryComponents: [LoginErrorDialogComponent, ImageDialog],
 })
 export class AppModule { }

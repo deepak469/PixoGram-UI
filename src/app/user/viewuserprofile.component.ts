@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { ImageService } from './image.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 export interface Tile {
   color: string;
@@ -36,7 +37,7 @@ export class ViewUserProfileComponent implements OnInit {
   imagesLoading: boolean;
   images: any[];
 
-  constructor(private http: HttpClient, private imageService: ImageService, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private imageService: ImageService, private route: ActivatedRoute, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -106,5 +107,32 @@ export class ViewUserProfileComponent implements OnInit {
         }
       }
     )
+  }
+
+  openDialog(): void {
+    console.log("Clicked")
+    const dialogRef = this.dialog.open(ImageDialog, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(_result => {
+    });
+  }
+
+}
+
+@Component({
+  selector: 'image-dialog',
+  templateUrl: './image.dialog.html',
+})
+export class ImageDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ImageDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
