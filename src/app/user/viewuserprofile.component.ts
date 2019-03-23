@@ -8,8 +8,9 @@ export interface Tile {
   color: string;
   cols: number;
   rows: number;
-  text: string;
   likes: string;
+  imageFilename: string;
+  caption: string;
 }
 
 @Component({
@@ -31,8 +32,6 @@ export class ViewUserProfileComponent implements OnInit {
 
   profileUserId: string;
   tiles: Tile[] = [];
-  imageFilenames: string[];
-  caption: string[];
   imagesLoading: boolean;
   images: any[];
 
@@ -50,14 +49,15 @@ export class ViewUserProfileComponent implements OnInit {
 
     //Get image imageMetadataUrl
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
-      this.imageFilenames = [];
-      this.caption = [];
       var metadataindex = 0;
       while (data[metadataindex] != null) {
-        console.log(data[metadataindex]);
-        this.imageFilenames.push(data[metadataindex].filename);
-        this.caption.push(data[metadataindex].caption);
-        this.tiles.push({ text: this.imageFilenames[metadataindex], likes: data[metadataindex].likes, cols: 1, rows: 1, color: 'green'});
+        this.tiles.push({
+          imageFilename: data[metadataindex].filename,
+          likes: data[metadataindex].likes,
+          caption: data[metadataindex].caption,
+          cols: 1,
+          rows: 1,
+          color: 'green' });
         this.getImage(data[metadataindex].filename);
         metadataindex++;
       }
@@ -95,7 +95,7 @@ export class ViewUserProfileComponent implements OnInit {
   openDialog(image, caption, filename): void {
     const dialogRef = this.dialog.open(ImageDialog, {
       width: '500px',
-      data: {filename: filename, image: image, caption: caption}
+      data: { filename: filename, image: image, caption: caption }
     });
 
     dialogRef.afterClosed().subscribe(_result => {
@@ -104,32 +104,62 @@ export class ViewUserProfileComponent implements OnInit {
 
 }
 
+export interface CommentsList{
+  filename: String;
+  comment: String;
+  username: String;
+}
+
 @Component({
   selector: 'image-dialog',
   templateUrl: './image.dialog.html',
 })
-export class ImageDialog {
+export class ImageDialog implements OnInit {
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': 'Bearer ' + localStorage.getItem("jwtToken"),
   });
 
-  addLikeUrl = 'http://localhost:8924/api/imagemetadata/like/'
+  addLikeUrl = 'http://localhost:8924/api/imagemetadata/like/?filename='
   sendCommentUrl = 'http://localhost:8924/api/imagecomments/'
+  getCommentsUrl = 'http://localhost:8924/api/imagecomments/getComments/?filename='
+
+  commentsList: CommentsList;
+  commentsListLoaded: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ImageDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) {}
+    @Inject(MAT_DIALOG_DATA) public data: any, private http: HttpClient) { }
+
+  ngOnInit() {
+    console.log(this.getCommentsUrl + this.data.filename);
+    this.http.get<any>(this.getCommentsUrl + this.data.filename, { headers: this.headers }).toPromise().then(data => {
+      this.commentsList = data;
+      console.log(this.commentsList);
+      this.commentsListLoaded = true;
+    }
+      ,
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    )
+  }
+
+  getCommentsListLoaded(){
+    return this.commentsListLoaded;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  likePic(filename){
-    let currImageMetadataUrl = this.addLikeUrl + "?filename=" + filename;
-
-    this.http.post(currImageMetadataUrl, { headers: this.headers }).toPromise().then(_data => {}
+  likePic() {
+    this.http.post(this.addLikeUrl + this.data.filename, { headers: this.headers }).toPromise().then(_data => { }
       ,
       (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
@@ -142,17 +172,22 @@ export class ImageDialog {
     )
   }
 
-  sendComment(comment, filename){
-    this.http.post(this.sendCommentUrl, {comment: comment, filename: filename, username: localStorage.getItem('name')} ,{ headers: this.headers }).toPromise().then(_data => {}
-      ,
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log('Client-side error occured.');
-        } else {
-          console.log(err.message);
-          console.log('Server-side error occured.');
+  sendComment(comment, filename) {
+    this.http.post(this.sendCommentUrl, {
+      comment: comment,
+      filename: filename,
+      username: localStorage.getItem('name')}
+      , { headers: this.headers })
+      .toPromise().then(_data => { }
+        ,
+        (err: HttpErrorResponse) => {
+          if (err.error instanceof Error) {
+            console.log('Client-side error occured.');
+          } else {
+            console.log(err.message);
+            console.log('Server-side error occured.');
+          }
         }
-      }
-    )
+      )
   }
 }

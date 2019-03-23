@@ -29,6 +29,7 @@ import { ImageAttrService } from './user/imageattr.service';
 import { EditImageAttrComponent } from './user/editimageattr.component';
 import { ChangeProfilePicComponent } from './user/changeprofilepic.component';
 import { FriendsComponent } from './user/friends.component';
+import { MatListModule } from '@angular/material/list';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -41,11 +42,11 @@ export const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'media', component: UserMediaComponent },
   { path: 'usersearch', component: UserSearchComponent },
-  { path: 'viewuserprofile', component: ViewUserProfileComponent},
-  { path: 'imageattr', component: ImageAttrComponent},
-  { path: 'editimageattr', component: EditImageAttrComponent},
-  { path: 'changeprofilepic', component: ChangeProfilePicComponent},
-  { path: 'friends', component: FriendsComponent},
+  { path: 'viewuserprofile', component: ViewUserProfileComponent },
+  { path: 'imageattr', component: ImageAttrComponent },
+  { path: 'editimageattr', component: EditImageAttrComponent },
+  { path: 'changeprofilepic', component: ChangeProfilePicComponent },
+  { path: 'friends', component: FriendsComponent },
 ];
 
 @NgModule({
@@ -82,6 +83,7 @@ export const routes: Routes = [
     BrowserAnimationsModule,
     MatGridListModule,
     MatDialogModule,
+    MatListModule,
   ],
   providers: [ImageService, ImageAttrService],
   bootstrap: [AppComponent],

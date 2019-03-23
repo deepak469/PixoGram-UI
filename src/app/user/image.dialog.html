@@ -2,12 +2,15 @@
 <div mat-dialog-content>
   <img [src]="data.image" height="400px" />
 </div>
-<button type="submit" class="likebutton" style="border: 0; background: transparent" (click)="likePic(data.filename)">
+<button type="submit" class="likebutton" style="border: 0; background: transparent" (click)="likePic()">
   <img src="/../../assets/thumbs-up.png" width="30" height="30" alt="submit" />
 </button>
+<mat-list *ngIf="getCommentsListLoaded()">
+   <a mat-list-item *ngFor="let vals of commentsList"> {{ vals.username }}: {{vals.comment}} </a>
+</mat-list>
 <br>
 <input matInput [(ngModel)]="comment" placeholder="Comment">
-<button mat-button (click)="sendComment(comment, data.filename)">Send Comment</button>
+<button mat-button (click)="sendComment(comment)">Send Comment</button>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>
 </div>

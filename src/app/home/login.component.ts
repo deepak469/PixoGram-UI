@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { LoginErrorDialogComponent } from './login-error-dialog.component';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent {
 
   loginUrl = 'http://localhost:8924/api/auth/signin'
 
-  constructor(private router: Router, private http: HttpClient, private dialog: MatDialog) { }
+  constructor(private router: Router, private http: HttpClient, private dialog: MatDialog, private list: MatListModule) { }
 
   login(inputUsername, inputPassword) {
     this.http.post<any>(this.loginUrl, { username: inputUsername, password: inputPassword }, this.httpOptions).subscribe(data => {

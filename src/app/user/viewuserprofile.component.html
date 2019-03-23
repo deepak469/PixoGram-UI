@@ -5,10 +5,10 @@
     [colspan]="tile.cols"
     [rowspan]="tile.rows"
     [style.background]="tile.color"
-    (click)="openDialog(images[i], caption[i], tile.text)">
+    (click)="openDialog(images[i], tile.caption, tile.imageFilename)">
     <img [src]="images[i]" height="400px"/>
     <mat-grid-tile-footer>
-      {{caption[i]}} <br> Likes: {{tile.likes}}
+      {{tile.caption}} <br> Likes: {{tile.likes}}
     </mat-grid-tile-footer>
   </mat-grid-tile>
 </mat-grid-list>
