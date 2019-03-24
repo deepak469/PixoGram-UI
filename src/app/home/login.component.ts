@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
-import { LoginErrorDialogComponent } from './login-error-dialog.component';
+import { ErrorDialogComponent } from './login-error-dialog.component';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
@@ -59,7 +59,7 @@ export class LoginComponent {
   }
 
   openAlertDialog(inputMessage: string) {
-    const dialogRef = this.dialog.open(LoginErrorDialogComponent, {
+    const dialogRef = this.dialog.open(ErrorDialogComponent, {
       data: {
         message: inputMessage,
         buttonText: {

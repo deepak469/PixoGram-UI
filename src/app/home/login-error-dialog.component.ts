@@ -5,12 +5,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   selector: 'app-alert-dialog',
   templateUrl: './login-error-dialog.component.html'
 })
-export class LoginErrorDialogComponent {
+export class ErrorDialogComponent {
   message: string = ""
   cancelButtonText = "Cancel"
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<LoginErrorDialogComponent>) {
+    private dialogRef: MatDialogRef<ErrorDialogComponent>) {
     if (data) {
       this.message = data.message || this.message;
       if (data.buttonText) {
