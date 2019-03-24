@@ -51,18 +51,9 @@ export class ViewUserProfileComponent implements OnInit {
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       var metadataindex = 0;
       while (data[metadataindex] != null) {
-        console.log(data[metadataindex].filename);
-        this.tiles.push({
-          filename: data[metadataindex].filename,
-          likes: data[metadataindex].likes,
-          caption: data[metadataindex].caption,
-          cols: 1,
-          rows: 1,
-          color: 'white' });
-        this.getImage(data[metadataindex].filename);
+        this.getImage(data[metadataindex]);
         metadataindex++;
       }
-
     }
       ,
       (err: HttpErrorResponse) => {
@@ -75,12 +66,20 @@ export class ViewUserProfileComponent implements OnInit {
     )
   }
 
-  getImage(imageFilename) {
+  getImage(imagedata) {
     this.imagesLoading = true;
-    this.imageService.getImage(this.downloadImageUrl + imageFilename).toPromise().then(data => {
+    this.imageService.getImage(this.downloadImageUrl + imagedata.filename).toPromise().then(data => {
       let reader = new FileReader();
       reader.addEventListener("load", () => {
         this.images.push(reader.result);
+        this.tiles.push({
+          filename: imagedata.filename,
+          likes: imagedata.likes,
+          caption: imagedata.caption,
+          cols: 1,
+          rows: 1,
+          color: 'white'
+        });
       }, false);
 
       if (data) {
@@ -106,7 +105,7 @@ export class ViewUserProfileComponent implements OnInit {
 
 }
 
-export interface CommentsList{
+export interface CommentsList {
   filename: String;
   comment: String;
   username: String;
@@ -152,7 +151,7 @@ export class ImageDialog implements OnInit {
     )
   }
 
-  getCommentsListLoaded(){
+  getCommentsListLoaded() {
     return this.commentsListLoaded;
   }
 
@@ -178,7 +177,8 @@ export class ImageDialog implements OnInit {
     this.http.post(this.sendCommentUrl, {
       comment: comment,
       filename: filename,
-      username: localStorage.getItem('name')}
+      username: localStorage.getItem('name')
+    }
       , { headers: this.headers })
       .toPromise().then(_data => { }
         ,

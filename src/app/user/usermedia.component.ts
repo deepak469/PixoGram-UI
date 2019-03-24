@@ -47,15 +47,7 @@ export class UserMediaComponent implements OnInit {
     this.http.get<any>(this.imageMetadataUrl, { headers: this.headers, params }).toPromise().then(data => {
       var metadataindex = 0;
       while (data[metadataindex] != null) {
-        this.tiles.push({
-          id: data[metadataindex].id,
-          filename: data[metadataindex].filename,
-          caption: data[metadataindex].caption,
-          likes: data[metadataindex].likes,
-          cols: 1,
-          rows: 1,
-          color: 'white' });
-        this.getImage(data[metadataindex].filename);
+        this.getImage(data[metadataindex]);
         metadataindex++;
       }
     }
@@ -71,14 +63,21 @@ export class UserMediaComponent implements OnInit {
     this.retrievalFinished = true;
   }
 
-  getImage(imageFilename) {
+  getImage(imagedata) {
     this.imagesLoading = true;
-    this.imageService.getImage(this.downloadImageUrl + imageFilename).toPromise().then(data => {
+    this.imageService.getImage(this.downloadImageUrl + imagedata.filename).toPromise().then(data => {
       let reader = new FileReader();
       reader.addEventListener("load", () => {
         this.images.push(reader.result);
+        this.tiles.push({
+          id: imagedata.id,
+          filename: imagedata.filename,
+          caption: imagedata.caption,
+          likes: imagedata.likes,
+          cols: 1,
+          rows: 1,
+          color: 'white' });
       }, false);
-
       if (data) {
         reader.readAsDataURL(data);
       }
