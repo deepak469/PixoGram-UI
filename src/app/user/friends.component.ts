@@ -23,6 +23,7 @@ export class FriendsComponent implements OnInit {
 
   getFriendsUrl = 'http://localhost:8924/api/friends/user/?userid='
   getFriendDetailsUrl = 'http://localhost:8924/api/user/?id='
+  removeFriendUrl = 'http://localhost:8924/api/friends/delete/?'
 
   friendIds: string[] = [];
   friendDetails: FriendDetails[] = [];
@@ -62,10 +63,26 @@ export class FriendsComponent implements OnInit {
     )
   }
 
-  viewProfile(userId) {
+  viewProfile(friendId) {
     this.router.navigate(['viewuserprofile'], {
       queryParams:
-        { userId: userId }
+        { userId: friendId }
     });
+  }
+
+  removeFriend(friendId){
+    let friendUrlWithParameters = this.removeFriendUrl + "userid=" +
+      localStorage.getItem('userId') + "&friendid=" + friendId
+    this.http.post<any>(friendUrlWithParameters, {headers: this.headers}).subscribe(_data =>{}
+      ,
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    )
+    this.router.navigate(['friends']);
   }
 }
