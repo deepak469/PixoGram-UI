@@ -123,7 +123,6 @@ export class UserHomeComponent implements OnInit {
         }
       }
     )
-    console.log(this.newsFeed);
   }
 
   changeProfilePic() {
