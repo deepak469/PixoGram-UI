@@ -177,7 +177,8 @@ export class ImageDialog implements OnInit {
     this.http.post(this.sendCommentUrl, {
       comment: comment,
       filename: filename,
-      username: localStorage.getItem('name')
+      username: localStorage.getItem('name'),
+      userId: localStorage.getItem('userId')
     }
       , { headers: this.headers })
       .toPromise().then(_data => { }

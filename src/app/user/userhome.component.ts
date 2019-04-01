@@ -2,7 +2,7 @@ import { ImageService } from './image.service';
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { FriendDetails } from './friends.component';
 
 @Component({
   selector: 'app-userhome',
@@ -19,6 +19,9 @@ export class UserHomeComponent implements OnInit {
 
   getUserDetailsUrl = "http://localhost:8924/api/user/?id=" + localStorage.getItem("userId")
   getProfilePictureUrl = "http://localhost:8924/api/downloadFile/"
+  getFriendsUrl = 'http://localhost:8924/api/friends/user/?userid=' + localStorage.getItem("userId")
+  getFriendCommentNumUrl = 'http://localhost:8924/api/imagecomments/recentcommentcount/?userid='
+  getFriendImageNumUrl = 'http://localhost:8924/api/imagemetadata/recentuploadcount/?userid='
 
   fullName: string;
   profilePictureUri: string;
@@ -27,6 +30,11 @@ export class UserHomeComponent implements OnInit {
   isPicturesLoading: boolean;
   profilePicture: any;
   imageToShow: any;
+
+  friendIds: string[] = [];
+  friendDetails: FriendDetails[] = [];
+
+  newsFeed: String[] = [];
 
   constructor(private http: HttpClient, private imageService: ImageService, private router: Router) { }
 
@@ -67,9 +75,58 @@ export class UserHomeComponent implements OnInit {
         }
       }
     )
+
+    //Get List of Friends
+    this.http.get<any>(this.getFriendsUrl, { headers: this.headers }).subscribe(data => {
+      var friendIdIndex = 0;
+      while (data[friendIdIndex] != null) {
+        this.friendIds.push(data[friendIdIndex].friendId);
+        friendIdIndex++;
+      }
+      //Get number of comments
+      for (let i = 0; i < this.friendIds.length; i++) {
+        this.http.get<any>(this.getFriendCommentNumUrl + this.friendIds[i], { headers: this.headers }).subscribe(data => {
+          if(data.length > 0){
+           this.newsFeed.push(data[0].username + " commented on " + data.length + " photos")
+          }
+        },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Client-side error occured.');
+            } else {
+              console.log('Server-side error occured.');
+            }
+          }
+        )
+        this.http.get<any>(this.getFriendImageNumUrl + this.friendIds[i], { headers: this.headers }).subscribe(data => {
+          console.log(data);
+          if(data.length > 0){
+           this.newsFeed.push(data[0].username + " uploaded " + data.length + " photos")
+          }
+        },
+          (err: HttpErrorResponse) => {
+            if (err.error instanceof Error) {
+              console.log('Client-side error occured.');
+            } else {
+              console.log('Server-side error occured.');
+            }
+          }
+        )
+      }
+
+    },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log('Client-side error occured.');
+        } else {
+          console.log('Server-side error occured.');
+        }
+      }
+    )
+    console.log(this.newsFeed);
   }
 
-  changeProfilePic(){
+  changeProfilePic() {
     this.router.navigate(['changeprofilepic'])
   }
 }

@@ -18,9 +18,7 @@ export class EditImageAttrComponent implements OnInit {
   fileId: string = "";
   filename: string = "";
   currCaption: string = "";
-  currDescription: string = "";
   updtCaption: string = "";
-  updtDescription: string = "";
   dataLoaded: boolean = false;
 
   headers = new HttpHeaders({
@@ -40,7 +38,6 @@ export class EditImageAttrComponent implements OnInit {
       this.http.get<any>(this.imageMetadataGetUrl, { headers: this.headers, params }).toPromise().then(data => {
         this.filename = data.filename;
         this.currCaption = data.caption;
-        this.currDescription = data.description;
         this.dataLoaded = true;
       }
         ,
@@ -58,8 +55,7 @@ export class EditImageAttrComponent implements OnInit {
   sendImageMetadata() {
     let currImageMetadataUrl = this.imageMetadataUpdateUrl +
       "filename=" + this.filename +
-      "&caption=" + this.updtCaption +
-      "&description=" + this.updtDescription;
+      "&caption=" + this.updtCaption;
 
     this.http.post(currImageMetadataUrl, { headers: this.headers }).toPromise().then(_data => {
       this.router.navigate(['media']);

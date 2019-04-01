@@ -4,7 +4,6 @@ export class ImageObject {
   filetype: String;
   size: String;
   caption: String;
-  description: String;
 
   constructor(inputFilename: String, inputFiletype: String, inputSize: String)
   {
@@ -13,6 +12,5 @@ export class ImageObject {
     this.filetype = inputFiletype;
     this.size = inputSize;
     this.caption = '';
-    this.description = '';
   }
 }

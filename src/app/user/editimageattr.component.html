@@ -8,10 +8,5 @@
     <br>
     <b>Update Caption:</b> <input [(ngModel)]="updtCaption" type="text" class="text" placeholder={{currCaption}} required>
   </p>
-  <p>
-    <b>Current Description:</b> {{currDescription}}
-    <br>
-    <b>Update Description:</b> <input [(ngModel)]="updtDescription" type="text" class="text" placeholder={{currDescription}} required>
-  </p>
   <button type="submit" class="btn" (click)="sendImageMetadata()">Apply Updates</button>
 </div>

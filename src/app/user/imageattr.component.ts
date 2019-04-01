@@ -38,8 +38,7 @@ export class ImageAttrComponent implements OnInit {
     for (let i = 0; i < this.imageObject.length; i++) {
       let currImageMetadataUrl = this.imageMetadataUpdateUrl +
       "filename=" + this.imageObject[i].filename.toString() +
-      "&caption=" + this.imageObject[i].caption.toString() +
-      "&description=" + this.imageObject[i].description.toString();
+      "&caption=" + this.imageObject[i].caption.toString();
 
       this.http.post(currImageMetadataUrl, {headers: this.headers}).subscribe(_data => { }
         ,

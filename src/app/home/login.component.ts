@@ -31,6 +31,7 @@ export class LoginComponent {
       localStorage.setItem("jwtToken", data.accessToken);
       localStorage.setItem("role", data.role);
       localStorage.setItem("userId", data.userId);
+      localStorage.setItem("username", this.username);
 
       switch (data.role) {
         case "1":

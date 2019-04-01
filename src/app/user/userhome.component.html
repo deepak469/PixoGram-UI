@@ -2,3 +2,8 @@
 <h3>Member Since: {{this.dateJoined | date}}</h3>
 <img [src]="profilePicture" width="400" height="500"/>
 <button type="submit" class="btn" (click)="changeProfilePic()">Change Profile Picture</button>
+<div>
+  <h2>News Feed</h2>
+  <tr *ngFor="let vals of newsFeed">
+    {{vals}}
+</div>
